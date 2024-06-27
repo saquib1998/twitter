@@ -1,6 +1,14 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
+[Live Link](https://twitter-clone-ten-pi.vercel.app/)
 ## Getting Started
+
+Add a .env file and add the following environment variables
+
+```
+DATABASE_URL=<MongoDB url>
+NEXTAUTH_SECRET=<any string>
+NEXTAUTH_JWT_SECRET=<any string>
+
+```
 
 First, run the development server:
 
