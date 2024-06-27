@@ -6,15 +6,15 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if(req.method !== 'POST' && req.method !== 'DELETE')
+  if (req.method !== 'POST' && req.method !== 'DELETE')
     return res.status(405).end();
 
   try {
-    const {userId} = req.body;
+    const { userId } = req.body;
 
-    const {currentUser} = await serverAuth(req, res);
+    const { currentUser } = await serverAuth(req, res);
 
-    if(!userId || typeof userId !== 'string')
+    if (!userId || typeof userId !== 'string')
       throw new Error('Invalid ID');
 
     const user = await prisma.user.findUnique({
@@ -23,15 +23,30 @@ export default async function handler(
       }
     });
 
-    if(!user)
+    if (!user)
       throw new Error('Invalid ID');
 
     let updateFollowingIds = [...(currentUser.followingIds || [])];
 
-    if(req.method == 'POST')
+    if (req.method == 'POST')
       updateFollowingIds.push(userId);
 
-    if(req.method == 'DELETE') {
+    try {
+
+      await prisma.notification.create({
+        data: {
+          body: 'Someone followed you',
+          userId
+        }
+      })
+
+
+    } catch (error) {
+      console.log(error);
+    }
+
+
+    if (req.method == 'DELETE') {
       updateFollowingIds = updateFollowingIds
         .filter(followingId => followingId != userId);
     }

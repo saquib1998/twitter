@@ -106,7 +106,7 @@ const Form: React.FC<FormProps> = ({
             mb-4
             font-bold
           ">
-            Welcome to Twitter
+            Welcome to Glitter
           </h1>
 
           <div className="flex flex-row items-center justify-center gap-4">
