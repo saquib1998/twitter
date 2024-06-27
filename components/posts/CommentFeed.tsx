@@ -1,8 +1,16 @@
 import CommentItem from "./CommentItem";
 
-interface CommentFeedProps {
-  comments?: Record<string, any>
+interface Comment {
+  id: string;
+  // Add other properties as needed
+  [key: string]: any;
 }
+
+interface CommentFeedProps {
+  comments?: Comment[];
+}
+
+
 const CommentFeed: React.FC<CommentFeedProps> = ({ comments = []}) => {
   return ( 
     <div>
